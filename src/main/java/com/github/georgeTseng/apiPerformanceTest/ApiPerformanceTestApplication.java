@@ -489,14 +489,14 @@ public class ApiPerformanceTestApplication {
    */
   public static String checkRequestSettingFile(Logger logger, Scanner scanner) throws CustomApplicationException {
 
-    logger.info("請問是否要載入可用的測試設定檔？(Y->是, N->否, 預設為否)");
+    logger.info("請問是否要載入可用的測試設定檔?(Y->是, N->否, 預設為否)");
     String testModel = scanner.nextLine();
     if (testModel == null) {
-      testModel = "N";
+      testModel = DEFAULT_NO;
     } else if (testModel.equalsIgnoreCase(DEFAULT_YES)) {
-      testModel = "Y";
+      testModel = DEFAULT_YES;
     } else if (testModel.equalsIgnoreCase(DEFAULT_NO)) {
-      testModel = "N";
+      testModel = DEFAULT_NO;
     } else {
       logger.error(DEFAULT_ERROR_MESSAGE);
       throw new CustomApplicationException(DEFAULT_ERROR_MESSAGE);
@@ -538,11 +538,11 @@ public class ApiPerformanceTestApplication {
     logger.info("請問是否要將測試設定值儲存成檔案？(Y->是, N->否, 預設為否)");
     String profileModel = scanner.nextLine();
     if (profileModel == null) {
-      profileModel = "N";
+      profileModel = DEFAULT_NO;
     } else if (profileModel.equalsIgnoreCase(DEFAULT_YES)) {
-      profileModel = "Y";
+      profileModel = DEFAULT_YES;
     } else if (profileModel.equalsIgnoreCase(DEFAULT_NO)) {
-      profileModel = "N";
+      profileModel = DEFAULT_NO;
     } else {
       logger.error(DEFAULT_ERROR_MESSAGE);
       throw new CustomApplicationException(DEFAULT_ERROR_MESSAGE);
@@ -595,11 +595,11 @@ public class ApiPerformanceTestApplication {
     logger.info("檔案已存在, 請問是否要覆蓋現有的檔案?(Y->是, N->否, 預設為否)");
     String testProfileFileModel = scanner.nextLine();
     if (testProfileFileModel == null) {
-      testProfileFileModel = "N";
+      testProfileFileModel = DEFAULT_NO;
     } else if (testProfileFileModel.equalsIgnoreCase(DEFAULT_YES)) {
-      testProfileFileModel = "Y";
+      testProfileFileModel = DEFAULT_YES;
     } else if (testProfileFileModel.equalsIgnoreCase(DEFAULT_NO)) {
-      testProfileFileModel = "N";
+      testProfileFileModel = DEFAULT_NO;
     } else {
       logger.error(DEFAULT_ERROR_MESSAGE);
       throw new CustomApplicationException(DEFAULT_ERROR_MESSAGE);
@@ -617,11 +617,11 @@ public class ApiPerformanceTestApplication {
     logger.info("請問是否要將測試結果輸出成檔案?(Y->是, N->否, 預設為否)");
     String testResultFileModel = scanner.nextLine();
     if (testResultFileModel == null) {
-      testResultFileModel = "N";
+      testResultFileModel = DEFAULT_NO;
     } else if (testResultFileModel.equalsIgnoreCase(DEFAULT_YES)) {
-      testResultFileModel = "Y";
+      testResultFileModel = DEFAULT_YES;
     } else if (testResultFileModel.equalsIgnoreCase(DEFAULT_NO)) {
-      testResultFileModel = "N";
+      testResultFileModel = DEFAULT_NO;
     } else {
       logger.error(DEFAULT_ERROR_MESSAGE);
       throw new CustomApplicationException(DEFAULT_ERROR_MESSAGE);
