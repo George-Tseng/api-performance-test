@@ -1,0 +1,4 @@
+com\github\georgeTseng\apiPerformanceTest\enums\SupportedHttpMethod.class
+com\github\georgeTseng\apiPerformanceTest\model\PerformanceTestData.class
+com\github\georgeTseng\apiPerformanceTest\model\PerformanceRequestData.class
+com\github\georgeTseng\apiPerformanceTest\exception\CustomApplicationException.class

@@ -1,0 +1,10 @@
+digraph "org.github.george-tseng:api-performance-test:jar:1.0-SNAPSHOT" { 
+	"org.github.george-tseng:api-performance-test:jar:1.0-SNAPSHOT" -> "org.apache.httpcomponents:httpclient:jar:4.5.13:compile" ; 
+	"org.github.george-tseng:api-performance-test:jar:1.0-SNAPSHOT" -> "org.apache.commons:commons-lang3:jar:3.12.0:compile" ; 
+	"org.github.george-tseng:api-performance-test:jar:1.0-SNAPSHOT" -> "ch.qos.logback:logback-classic:jar:1.2.10:test" ; 
+	"org.apache.httpcomponents:httpclient:jar:4.5.13:compile" -> "org.apache.httpcomponents:httpcore:jar:4.4.13:compile" ; 
+	"org.apache.httpcomponents:httpclient:jar:4.5.13:compile" -> "commons-logging:commons-logging:jar:1.2:compile" ; 
+	"org.apache.httpcomponents:httpclient:jar:4.5.13:compile" -> "commons-codec:commons-codec:jar:1.11:compile" ; 
+	"ch.qos.logback:logback-classic:jar:1.2.10:test" -> "ch.qos.logback:logback-core:jar:1.2.10:test" ; 
+	"ch.qos.logback:logback-classic:jar:1.2.10:test" -> "org.slf4j:slf4j-api:jar:1.7.32:test" ; 
+ } 

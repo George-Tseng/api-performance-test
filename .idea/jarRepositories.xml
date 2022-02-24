@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Maven Central-repository-one" />
+      <option name="name" value="Maven Central-repository-one" />
+      <option name="url" value="http://repo1.maven.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="eyesmedia-mvn-snapshot" />
+      <option name="name" value="eyesmedia snapshot maven repository" />
+      <option name="url" value="http://18.180.149.22:8082/repository/eyesmedia-mvn-snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="eyesmedia-mvn-release" />
+      <option name="name" value="eyesmedia release maven repository" />
+      <option name="url" value="http://18.180.149.22:8082/repository/eyesmedia-mvn-release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="eyesmedia-mvn-release-proxy" />
+      <option name="name" value="eyesmedia release maven repository" />
+      <option name="url" value="http://18.180.149.22:8082/repository/eyesmedia-mvn-release-proxy/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="eyesmedia-mvn-snapshot-proxy" />
+      <option name="name" value="eyesmedia snapshot maven repository" />
+      <option name="url" value="http://18.180.149.22:8082/repository/eyesmedia-mvn-snapshot-proxy/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Maven Central-repository-two" />
+      <option name="name" value="Maven Central-repository-two" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+  </component>
+</project>
