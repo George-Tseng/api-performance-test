@@ -7,13 +7,12 @@ import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestFileData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceResultFileData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceTestData;
-import java.nio.file.Path;
+import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import org.apache.commons.lang3.StringUtils;
 
 public class DataTransferUtils {
 
