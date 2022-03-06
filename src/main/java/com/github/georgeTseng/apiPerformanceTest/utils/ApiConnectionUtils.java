@@ -5,6 +5,9 @@ import com.github.georgeTseng.apiPerformanceTest.ApiPerformanceTestApplication.H
 import com.github.georgeTseng.apiPerformanceTest.enums.SupportedHttpMethod;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceTestData;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.Optional;
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.lang3.StringUtils;
@@ -22,19 +25,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ApiConnectionUtils {
 
   public final static Integer HTTP_OK_STATUS = 200;
+  private final static String ERROR_PARAM_KEY = "error";
 
   public static PerformanceTestData getApiConnectResult(PerformanceRequestData requestData) throws UnsupportedEncodingException,
       ClientProtocolException,
       IOException {
 
+    Type jsonRefType = new TypeToken<Map<String, Object>>() {}.getType();
+
     Logger apiConnectionUtilsLogger = LoggerFactory.getLogger(ApiConnectionUtils.class);
+
+    Map<String, Object> responseDatas = new HashMap<>();
 
     /* 取出Http方法 */
     SupportedHttpMethod targetHttpMethod = requestData.getHttpMethod();
@@ -54,9 +64,11 @@ public class ApiConnectionUtils {
       response = getApiConnectByFormPost(client, requestData);
     } else {
       apiConnectionUtilsLogger.error("本程式上不支援此種組合: {} : {} ", targetHttpMethod, contentType);
+      responseDatas.put(ERROR_PARAM_KEY, "本程式上不支援此種組合: " + targetHttpMethod + ":" + contentType);
+
       return PerformanceTestData.builder()
           .statusCode(400)
-          .responseText("本程式上不支援此種組合: " + targetHttpMethod + ":" + contentType)
+          .responseDatas(responseDatas)
           .build();
     }
 
@@ -77,9 +89,12 @@ public class ApiConnectionUtils {
     /* 轉出回傳之json string */
     String responseJsonString = EntityUtils.toString(responseEntity, responseEncoding);
 
+    /* 轉成map */
+    responseDatas = new Gson().fromJson(responseJsonString, jsonRefType);
+
     return PerformanceTestData.builder()
         .statusCode(statusCode)
-        .responseText(responseJsonString)
+        .responseDatas(responseDatas)
         .build();
 
   }

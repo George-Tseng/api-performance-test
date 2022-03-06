@@ -1,5 +1,7 @@
 package com.github.georgeTseng.apiPerformanceTest.model;
 
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +15,6 @@ public class PerformanceTestData {
 
   private Long operateTime;
   private Integer statusCode;
-  private String responseText;
+  private Map<String, Object> responseDatas;
 
 }

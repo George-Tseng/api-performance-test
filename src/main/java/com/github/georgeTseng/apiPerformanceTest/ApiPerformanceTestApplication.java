@@ -6,6 +6,8 @@ import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceTestData;
 import com.github.georgeTseng.apiPerformanceTest.task.PerformanceTask;
 import com.github.georgeTseng.apiPerformanceTest.utils.JsonUtils;
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -441,7 +443,8 @@ public class ApiPerformanceTestApplication {
           logger.info("第 {} 次執行時的耗時資訊為: {} ms", (index + 1), currentOperateTime);
 
           /* 顯示 api 回應的訊息 */
-          String currentResponseText = currentTestData.getResponseText();
+          Map<String, Object> currentResponseDatas = currentTestData.getResponseDatas();
+          String currentResponseText = new Gson().toJson(currentResponseDatas);
           logger.info("第 {} 次執行時的回傳資訊為: {} ", (index + 1), currentResponseText + System.lineSeparator());
 
           if (worstOperateTime < currentOperateTime) {

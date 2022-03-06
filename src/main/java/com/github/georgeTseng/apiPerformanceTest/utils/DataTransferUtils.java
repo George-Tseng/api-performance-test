@@ -7,7 +7,9 @@ import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestFileData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceResultFileData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceTestData;
+
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -191,7 +193,7 @@ public class DataTransferUtils {
         .accept(acceptValue)
         .otherHeadersParams(requestJsonData.getOtherHeadersParams())
         .otherParams(requestJsonData.getOtherParams())
-        .filePath(filePath.toString())
+        .filePath(filePath)
         .build();
 
   }

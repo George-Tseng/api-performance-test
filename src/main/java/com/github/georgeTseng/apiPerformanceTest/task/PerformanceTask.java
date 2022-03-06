@@ -4,6 +4,7 @@ import com.github.georgeTseng.apiPerformanceTest.exception.CustomApplicationExce
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceRequestData;
 import com.github.georgeTseng.apiPerformanceTest.model.PerformanceTestData;
 import com.github.georgeTseng.apiPerformanceTest.utils.ApiConnectionUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -27,10 +30,14 @@ public class PerformanceTask implements Callable<PerformanceTestData> {
   private Integer totalCount;
   private PerformanceRequestData requestData;
 
+  private final static String ERROR_PARAM_KEY = "error";
+
   @Override
   public PerformanceTestData call() throws CustomApplicationException {
 
     Logger performanceTaskLogger = LoggerFactory.getLogger(PerformanceTask.class);
+
+    Map<String, Object> responseDatas = new HashMap<>();
 
     /* 顯示系統當前時間(ms) */
     long startTime = System.currentTimeMillis();
@@ -44,23 +51,29 @@ public class PerformanceTask implements Callable<PerformanceTestData> {
     } catch (UnsupportedEncodingException e) {
       /* 代表 StringEntity 建立失敗 */
       performanceTaskLogger.error("執行失敗, 無法建立 StringEntity ! ");
+      responseDatas.put(ERROR_PARAM_KEY, "執行失敗, 無法建立 StringEntity ! ");
+
       responseData = PerformanceTestData.builder()
           .statusCode(400)
-          .responseText("執行失敗, 無法建立 StringEntity ! ")
+          .responseDatas(responseDatas)
           .build();
     } catch (ClientProtocolException e) {
       /* 代表 CloseableHttpClient物件.execute 執行失敗 */
       performanceTaskLogger.error("執行失敗, execute 失敗 ! ");
+      responseDatas.put(ERROR_PARAM_KEY, "執行失敗, execute 失敗 ! ");
+
       responseData = PerformanceTestData.builder()
           .statusCode(400)
-          .responseText("執行失敗, execute 失敗 ! ")
+          .responseDatas(responseDatas)
           .build();
     } catch (IOException e) {
       /* IOException */
       performanceTaskLogger.error("執行失敗, 發生 IOException ! ");
+      responseDatas.put(ERROR_PARAM_KEY, "執行失敗, 發生 IOException ! ");
+
       responseData = PerformanceTestData.builder()
           .statusCode(400)
-          .responseText("執行失敗, 發生 IOException ! ")
+          .responseDatas(responseDatas)
           .build();
     }
 
@@ -75,13 +88,13 @@ public class PerformanceTask implements Callable<PerformanceTestData> {
 
     /* 取出 status code 與回應內文 */
     int currentStatusCode = responseData.getStatusCode();
-    String responseText = responseData.getResponseText();
+    responseDatas = responseData.getResponseDatas();
 
     /* 生成回傳用的 TaskData 物件 */
     PerformanceTestData currentTestData = PerformanceTestData.builder()
         .operateTime(costTime)
         .statusCode(currentStatusCode)
-        .responseText(responseText)
+        .responseDatas(responseDatas)
         .build();
 
     /* 取出總執行次數 */
