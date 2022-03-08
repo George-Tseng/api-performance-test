@@ -165,14 +165,16 @@ public class ApiPerformanceTestApplication {
         saveRequestTestingResult(mainLogger, scanner, taskResults);
       }
 
-      endingProgram(mainLogger, scanner, "測試程式已順利完成工作並結束");
+      displayEndingMessage(mainLogger, "測試程式已順利完成工作並結束");
 
     } catch (CustomApplicationException e) {
       if (Optional.ofNullable(e.getErrorCause()).isPresent()) {
-        endingProgramInError(mainLogger, scanner, e.getErrorMessage(), e.getErrorCause());
+        displayEndingMessageInError(mainLogger, e.getErrorMessage(), e.getErrorCause());
       } else {
-        endingProgramInError(mainLogger, scanner, e.getErrorMessage());
+        displayEndingMessageInError(mainLogger, e.getErrorMessage());
       }
+    } finally {
+      endingOfTheProgram(mainLogger, scanner);
     }
 
   }
@@ -347,19 +349,24 @@ public class ApiPerformanceTestApplication {
     return scanner.nextLine();
   }
 
-  public static void endingProgram(Logger logger, Scanner scanner, String message) {
+  public static void displayEndingMessage(Logger logger, String message) {
     logger.info(message);
-    scanner.close();
   }
 
-  public static void endingProgramInError(Logger logger, Scanner scanner, String message) {
+  public static void displayEndingMessageInError(Logger logger, String message) {
     logger.info(message);
-    scanner.close();
   }
 
-  public static void endingProgramInError(Logger logger, Scanner scanner, String message, Throwable cause) {
+  public static void displayEndingMessageInError(Logger logger, String message, Throwable cause) {
     logger.info("{} , 原因為: {} ", message, cause);
-    scanner.close();
+  }
+
+  public static void endingOfTheProgram(Logger logger, Scanner scanner) {
+    try {
+      scanner.close();
+    } catch (Exception e) {
+      logger.error("fail to close the scanner, reason is : {} ", e);
+    }
   }
 
   public static void viewParams(Logger logger, PerformanceRequestData requestData) {
